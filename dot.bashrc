@@ -19,6 +19,8 @@ alias redis=' ssh -f -N -L 6379:dev-shared-redis.e1kedr.0001.use1.cache.amazonaw
 alias solr='ssh -f -N -L 8983:solr-onsugar-com-1437925068.us-east-1.elb.amazonaws.com:8983 dev4.onsugar.com'
 alias potato='ssh sugaropsdeploy.sugarops.com'
 
+alias dockup='docker-compose -f docker-compose-local.yml up -d; docker-compose logs -f nginx sparkle-cloud app'
+
 alias stunnel='ssh -R 8000:localhost:8000 dev3.onsugar.com'
 
 alias kickstash='ssh -t logstashnew.sugarops.com "sudo service nginx restart"'
@@ -187,3 +189,4 @@ rdr proto tcp from any to any port 443 -> 127.0.0.1 port 8443
 
 # added by travis gem
 [ -f /Users/mpatnode/.travis/travis.sh ] && source /Users/mpatnode/.travis/travis.sh
+

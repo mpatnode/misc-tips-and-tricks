@@ -90,3 +90,13 @@ function ends_with($haystack, $needle) {
     return (substr($haystack, $start) === $needle);
 }
 
+function radix_encode($val, $base = 52, $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ') {
+    $str = '';
+    do {
+        $i = $val % $base;
+        $str = $chars[$i] . $str;
+        $val = ($val - $i) / $base;
+    } while($val > 0);
+    return $str;
+}
+
