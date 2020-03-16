@@ -59,16 +59,16 @@ int legal(int from, vector<int> pegs[]) {
 }
 
 int main() {
-	int tests, rings;
-    
-	// scanf("%d\n", &tests);
+    int tests, rings;
+
+    // scanf("%d\n", &tests);
     tests = 1;
-	for (int i = 0; i < tests; i++) {
-	    vector<int> pegs[3]; // from, to, use;
+    for (int i = 0; i < tests; i++) {
+        vector<int> pegs[3]; // from, to, use;
         move_count = 0;
         printf("Enter number of rings: ");
-	    scanf("%d", &rings);
-	    // scanf("%d %d\n", &rings, &report);
+        scanf("%d", &rings);
+        // scanf("%d %d\n", &rings, &report);
         for (int p = rings; p > 0; p--) {
             pegs[0].push_back(p);
         }
@@ -84,6 +84,6 @@ int main() {
                 }
             }
         }
-	}
-	return 0;
+    }
+    return 0;
 }
