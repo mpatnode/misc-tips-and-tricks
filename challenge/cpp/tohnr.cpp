@@ -12,10 +12,12 @@ void move(vector<int> pegs[], int from, int to) {
     last = pegs[from].back();
     pegs[from].pop_back();
     pegs[to].push_back(last);
-    // printf("Moved %d from %s to %s\n", last, names[from], names[to]);
+    printf("Moved %d from %s to %s\n", last, names[from], names[to]);
+    /*
     if (++move_count == report) {
         printf("%d %d\n", from + 1, to + 1);
     }
+    */
 }
 
 int legal(int from, vector<int> pegs[]) {
@@ -57,28 +59,31 @@ int legal(int from, vector<int> pegs[]) {
 }
 
 int main() {
-    int tests, plates;
+	int tests, rings;
     
-    scanf("%d\n", &tests);
-    for (int i = 0; i < tests; i++) {
-        vector<int> pegs[3]; // from, to, use;
+	// scanf("%d\n", &tests);
+    tests = 1;
+	for (int i = 0; i < tests; i++) {
+	    vector<int> pegs[3]; // from, to, use;
         move_count = 0;
-        scanf("%d %d\n", &plates, &report);
-        for (int p = plates; p > 0; p--) {
+        printf("Enter number of rings: ");
+	    scanf("%d", &rings);
+	    // scanf("%d %d\n", &rings, &report);
+        for (int p = rings; p > 0; p--) {
             pegs[0].push_back(p);
         }
-        move(pegs, 0, (plates & 1) ? 2 : 1);
+        move(pegs, 0, (rings & 1) ? 2 : 1);
 
         int dst;
         
         int count = 0;
-        while (pegs[2].size() < plates) {
+        while (pegs[2].size() < rings) {
             for(int src = 0; src < 3; src++) {
                 if ((dst = legal(src, pegs)) >= 0) {
                     move(pegs, src, dst);
                 }
             }
         }
-    }
-    return 0;
+	}
+	return 0;
 }
