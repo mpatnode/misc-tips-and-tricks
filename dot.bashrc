@@ -17,7 +17,8 @@ alias kmysql='sudo mysqladmin shutdown'
 alias memc='memcached -vv | cat -v 2>&1'
 alias redis=' ssh -f -N -L 6379:dev-shared-redis.e1kedr.0001.use1.cache.amazonaws.com:6379 sugarqabastion11.sugarops.com'
 alias solr='ssh -f -N -L 8983:solr-onsugar-com-1437925068.us-east-1.elb.amazonaws.com:8983 dev4.onsugar.com'
-alias potato='ssh sugaropsdeploy.sugarops.com'
+
+alias dclean="docker volume rm $(docker volume ls -qf dangling=true); docker rmi $(docker images | grep '^<none>' | awk '{print $3}')"
 
 alias dockup='docker-compose -f docker-compose-local.yml up -d; docker-compose logs -f nginx sparkle-cloud app'
 
