@@ -20,6 +20,8 @@ if has("autocmd")
         autocmd BufRead,BufNewFile *.profile set filetype=php
         autocmd BufRead,BufNewFile *.view set filetype=php
     augroup END
+    autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
+    autocmd FileType css setlocal shiftwidth=2 tabstop=2 softtabstop=2
 endif
 
 " For write as root...
