@@ -56,6 +56,10 @@ alias gitundo='git reset --soft @^'
 
 alias gitlsdel="git log --diff-filter=D --summary"
 
+alias menv=". .*/bin/activate"
+
+complete -C '/usr/local/bin/aws_completer' aws
+
 gitundel() {
     git checkout $(git rev-list -n 1 HEAD -- "$1")^ -- "$1"
 }
@@ -189,6 +193,39 @@ rdr proto tcp from any to any port 443 -> 127.0.0.1 port 8443
 " | sudo pfctl -ef -
 }
 
-# added by travis gem
-[ -f /Users/mpatnode/.travis/travis.sh ] && source /Users/mpatnode/.travis/travis.sh
+cuniq() {
+    local column_name=$1
+    local csv_file=$2
+
+    # Get the column number for the specified column name
+    column_number=$(head -1 "$csv_file" | awk -v col="$column_name" -F, '{for (i=1; i<=NF; i++) if ($i == col) print i}')
+
+    # Check if the column name exists
+    if [ -z "$column_number" ]; then
+        echo "Column '$column_name' not found in the CSV file."
+        return 1
+    fi
+
+    # Count unique values in the specified column
+    awk -F, -v col="$column_number" 'NR > 1 {unique[$col]++} END {print length(unique)}' "$csv_file"
+}
+
+puniq() {
+    local column_name=$1
+    local csv_file=$2
+
+    # Get the column number for the specified column name
+    column_number=$(head -1 "$csv_file" | awk -v col="$column_name" -F, '{for (i=1; i<=NF; i++) if ($i == col) print i}')
+
+    # Check if the column name exists
+    if [ -z "$column_number" ]; then
+        echo "Column '$column_name' not found in the CSV file."
+        return 1
+    fi
+
+    # Print the file only showing the first time that column value appears
+    awk -F, '!seen[$column_number]++' $csv_file
+}
+
+
 
